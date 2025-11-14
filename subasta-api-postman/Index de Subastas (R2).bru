@@ -1,0 +1,16 @@
+meta {
+  name: Index de Subastas (R2)
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8080/api/subastas
+  body: json
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Enviar Oferta
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/subastas/1/ofertas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "dni": "12345678",
+      "monto": 155
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

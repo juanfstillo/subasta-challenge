@@ -1,0 +1,25 @@
+meta {
+  name: Crear una Subasta (R1)
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/subastas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nombre_vendedor": "Vendedor de Prueba",
+      "descripcion": "Un martillo de madera",
+      "precio_inicial": 100.50,
+      "fecha_realizacion": "2025-11-20 12:00:00"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
