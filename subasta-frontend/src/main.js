@@ -1,9 +1,8 @@
-// import './assets/main.css'
-
-import { createApp } from 'vue'
-import { createPinia } from 'pinia' // 👈 Importá Pinia
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia'; // <-- 1. Importar Pinia
+import App from './App.vue';
+import router from './router'; // <-- 2. Importar el Router
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Echo from 'laravel-echo' // Importá Echo
 import Pusher from 'pusher-js' // 👈 Importá PUSHER (no Reverb)
@@ -28,9 +27,9 @@ window.Echo = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia()) // 👈 Activá Pinia
-app.use(router)
+app.use(createPinia()); // <-- 3. Usar Pinia
+app.use(router); // <-- 4. Usar el Router
 
-app.mount('#app')
+app.mount('#app');

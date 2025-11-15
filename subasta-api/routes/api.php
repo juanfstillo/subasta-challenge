@@ -15,4 +15,6 @@ Route::get('/subastas', [SubastaController::class, 'index']);
 
 Route::post('/subastas', [SubastaController::class, 'store']);
 
+Route::get('/subastas/{subasta}', [SubastaController::class, 'show']);
+
 Route::post('/subastas/{subasta}/ofertas', [OfertaController::class, 'store']);
