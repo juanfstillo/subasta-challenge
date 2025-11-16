@@ -12,6 +12,7 @@ class Subasta extends Model
         'descripcion',
         'precio_inicial',
         'fecha_realizacion',
+        'precio_actual',
     ];
 
     public function ofertas(): HasMany

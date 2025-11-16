@@ -39,7 +39,8 @@ class OfertaController extends Controller
 
         // 3. Guardar la oferta
         $oferta = $subasta->ofertas()->create($validador->validated());
-
+        $subasta->precio_actual = $oferta->monto;
+        $subasta->save();
         // 4.Transmitir el evento por el socket
         // Esto enviará la $oferta a todos los que escuchen 'subasta.X'
         broadcast(new NuevaOfertaRegistrada($oferta));

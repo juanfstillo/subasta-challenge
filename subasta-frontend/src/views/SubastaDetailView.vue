@@ -1,6 +1,8 @@
 <template>
-  <div class="container my-5">
-
+  <div class="container">
+  <div class="text-center py-5">
+    <img :src="logoSubasta" alt="Logo de Subasta" />
+  </div>
     <router-link to="/subastas" class="btn btn-outline-secondary mb-4">
       &larr; Volver al listado
     </router-link>
@@ -36,7 +38,8 @@
           </li>
           <li class="list-group-item">
             Fecha de Realización:
-            <strong>{{ store.subastaActual.fecha_realizacion }}</strong>
+            <strong>{{ formatDate(store.subastaActual.fecha_realizacion) }}</strong>
+
           </li>
           <li class="list-group-item">
             Estado:
@@ -127,6 +130,8 @@
 import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useSubastaStore } from '../stores/subastaStore';
+import logoSubasta from '../assets/images/logo-subasta.svg';
+import { formatDate } from '../utils/formatters.js';
 
 // 1. Inicializamos store y route
 const store = useSubastaStore();

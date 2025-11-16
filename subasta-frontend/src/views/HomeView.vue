@@ -1,8 +1,8 @@
 <template>
   <div class="container text-center py-5">
-    <img :src="logoSubasta" alt="Logo de Subasta" class="logo-superior" />
-    <h1 class="mb-3">Bienvenido a Subasta Online</h1>
-    <p class="mb-4">¡Participa en las mejores subastas y encuentra productos únicos!</p>
+    <img :src="logoSubasta" alt="Logo de Subasta" />
+    <h1 class="mb-3 pt-1">Bienvenido a Subasta Online</h1>
+    <p class="mb-4">¡A la hora de realizar una subasta solo confíe sólo en el especialista!</p>
     <router-link to="/subastas" class="btn btn-primary btn-lg">
       Ver Subastas
     </router-link>

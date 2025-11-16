@@ -1,18 +1,23 @@
 import { defineStore } from 'pinia';
 import SubastaService from '../services/subastaService';
 
-// defineStore('ID_UNICO_DEL_STORE', { ...config... })
 export const useSubastaStore = defineStore('subasta', {
 
   // 1. STATE: Aquí "viven" los datos
   state: () => ({
-    subastas: [], // Aquí guardaremos la lista de la API
-    isLoading: false, // Para mostrar un "Cargando..."
+    subastas: [],
+    subastaActual: null,
+    isLoading: false,
+    isLoadingDetail: false,
+    isSubmittingBid: false,
+    bidError: null,
+    isCreating: false,
+    createError: null,// Para mostrar un "Cargando..."
   }),
 
   // 2. ACTIONS: Son métodos que modifican el state.
   actions: {
-    // Esta es la función que llamaremos desde nuestra vista
+
     async fetchSubastas() {
       this.isLoading = true; // Empezamos a cargar
 
@@ -78,6 +83,37 @@ export const useSubastaStore = defineStore('subasta', {
       } finally {
         this.isSubmittingBid = false;
       }
+    },
+
+    async createSubasta(data) {
+      this.isCreating = true;
+      this.createError = null;
+
+      try {
+        // 1. Llama al servicio
+        await SubastaService.createSubasta(data);
+
+        // 2. ¡Éxito!
+        this.isCreating = false;
+
+        // 3. (Opcional) Refrescamos la lista de subastas para la próxima vez
+        this.fetchSubastas();
+
+        return true; // Devuelve 'true' para que el formulario sepa que salió bien
+
+      } catch (error) {
+        // 4. Manejo de error (ej: 422 Validación)
+        this.isCreating = false;
+        if (error.response && error.response.status === 422) {
+          // Guardamos los errores de validación de Laravel
+          this.createError = error.response.data;
+        } else {
+          this.createError = { message: 'Ocurrió un error inesperado.' };
+        }
+        console.error('Error al crear la subasta:', error);
+        return false; // Devuelve 'false' para el formulario
+      }
     }
+
   }
 });

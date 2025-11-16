@@ -1,15 +1,16 @@
 <template>
-    <div class="d-flex flex-column align-items-center justify-content-center py-4">
-      <img :src="logoSubasta" alt="Logo de Subasta" class="logo-superior mb-4" />
+    <div class="container text-center py-5">
+      <img :src="logoSubasta" alt="Logo de Subasta"/>
     </div>
 
-
-
-  <div class="container my-5">
+  <div class="container ">
      <router-link to="/" class="btn btn-outline-secondary mb-4">
       &larr; Volver a Home
     </router-link>
     <h1 class="mb-4">Subastas Disponibles</h1>
+      <router-link to="/subastas/crear" class="btn btn-success mb-4 ">
+        + Crear Subasta
+      </router-link>
 
     <div v-if="store.isLoading" class="text-center">
       <div class="spinner-border text-primary" role="status">
@@ -29,13 +30,17 @@
           <div class="card-body d-flex flex-column">
 
             <h5 class="card-title">{{ subasta.descripcion }}</h5>
+            <h6 class="card-title">Vendedor: <span style="font-style: italic;">{{ subasta.nombre_vendedor }}</span></h6>
 
             <ul class="list-group list-group-flush mb-3">
               <li class="list-group-item px-0">
                 Precio base: <span class="fw-bold text-success">${{ subasta.precio_inicial }}</span>
               </li>
               <li class="list-group-item px-0">
-                Inicio: <span class="text-muted">{{ subasta.fecha_realizacion }}</span>
+                Precio actual: <span class="fw-bold text-danger">${{ subasta.precio_actual || subasta.precio_inicial }}</span>
+              </li>
+              <li class="list-group-item px-0">
+                Inicio: <span class="text-muted">{{ formatDate(subasta.fecha_realizacion) }}</span>
               </li>
             </ul>
 
@@ -63,10 +68,7 @@
 import { onMounted } from 'vue';
 import { useSubastaStore } from '../stores/subastaStore';
 import logoSubasta from '../assets/images/logo-subasta.svg';
-
-
-// (No es necesario importar RouterLink, Vue Router lo hace global)
-
+import { formatDate } from '../utils/formatters.js';
 const store = useSubastaStore();
 
 onMounted(() => {
@@ -77,7 +79,6 @@ onMounted(() => {
 <style scoped>
 
 .card {
-  /* Podrías poner alguna personalización MÍNIMA que Bootstrap no tenga */
   transition: transform 0.2s ease-in-out;
 }
 

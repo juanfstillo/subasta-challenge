@@ -16,9 +16,10 @@ export default {
       dni: dni
     };
     return apiClient.post(`/api/subastas/${subastaId}/ofertas`, payload);
+  },
+
+  createSubasta(data) {
+    return apiClient.post('/api/subastas', data);
   }
 
-  // En el futuro, aquí pondrías:
-  // getSubasta(id) { return apiClient.get(`/api/subastas/${id}`); }
-  // createSubasta(data) { return apiClient.post('/api/subastas', data); }
 };
