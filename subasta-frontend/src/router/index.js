@@ -21,6 +21,7 @@ const router = createRouter({
     name: 'subasta-detalle',
     component: SubastaDetailView
   }
+
   ],
 })
 

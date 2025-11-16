@@ -1,6 +1,14 @@
 <template>
-  <div class="container my-5">
+    <div class="d-flex flex-column align-items-center justify-content-center py-4">
+      <img :src="logoSubasta" alt="Logo de Subasta" class="logo-superior mb-4" />
+    </div>
 
+
+
+  <div class="container my-5">
+     <router-link to="/" class="btn btn-outline-secondary mb-4">
+      &larr; Volver a Home
+    </router-link>
     <h1 class="mb-4">Subastas Disponibles</h1>
 
     <div v-if="store.isLoading" class="text-center">
@@ -54,6 +62,8 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useSubastaStore } from '../stores/subastaStore';
+import logoSubasta from '../assets/images/logo-subasta.svg';
+
 
 // (No es necesario importar RouterLink, Vue Router lo hace global)
 

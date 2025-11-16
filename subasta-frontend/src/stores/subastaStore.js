@@ -42,6 +42,42 @@ export const useSubastaStore = defineStore('subasta', {
       } finally {
         this.isLoadingDetail = false;
       }
+    },
+
+    async realizarPuja(monto, dni) {
+      if (!this.subastaActual) return;
+
+      this.isSubmittingBid = true;
+      this.bidError = null;
+
+      try {
+        // 1. Llama al servicio. La respuesta será la 'oferta' (o 201)
+        await SubastaService.realizarPuja(this.subastaActual.id, monto, dni);
+
+        // 2. ¡ÉXITO! No nos importa la respuesta.
+        // Simplemente volvemos a pedir los datos de la subasta.
+        // Esto la actualizará con el precio_actual (si lo calculas)
+        // y la nueva lista de ofertas.
+        await this.fetchSubasta(this.subastaActual.id);
+
+      } catch (error) {
+        // 3. Manejo de error (tu backend devuelve 422)
+        if (error.response && error.response.status === 422) {
+          const errors = error.response.data;
+          if (errors.monto) {
+            this.bidError = errors.monto[0]; // Ej: "El monto debe ser mayor a 1500"
+          } else if (errors.dni) {
+            this.bidError = errors.dni[0];
+          } else {
+            this.bidError = "Error de validación.";
+          }
+        } else {
+          this.bidError = 'Ocurrió un error inesperado al realizar la puja.';
+        }
+        console.error('Error al realizar la puja:', error);
+      } finally {
+        this.isSubmittingBid = false;
+      }
     }
   }
 });

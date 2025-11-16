@@ -16,6 +16,6 @@ class Subasta extends Model
 
     public function ofertas(): HasMany
     {
-        return $this->hasMany(Oferta::class);
+        return $this->hasMany(Oferta::class)->orderBy('monto', 'desc');
     }
 }

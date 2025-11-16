@@ -44,6 +44,8 @@ class SubastaController extends Controller
      */
     public function show(Subasta $subasta)
     {
+        $subasta->load('ofertas');
+
         return response()->json($subasta);
     }
 
