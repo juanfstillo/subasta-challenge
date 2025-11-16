@@ -161,3 +161,8 @@ Para bajar todos los contenedores del backend:
 cd backend
 ./vendor/bin/sail down
 ```
+
+![imagen-sistema](./c.png)
+![imagen-sistema](./c1.png)
+![imagen-sistema](./c2.png)
+![imagen-sistema](./c3.png)
