@@ -1,8 +1,3 @@
-Aquí tenés una **versión mucho más limpia, ordenada y profesional** del README.
-Mantiene todo el contenido pero con una estructura clara, buena jerarquía visual y formato consistente.
-
----
-
 # 🏷️ Sistema de Subastas (Laravel + Vue)
 
 Este repositorio contiene una aplicación completa de **subastas en tiempo real**, organizada como un _monorepo_ con dos proyectos independientes:
